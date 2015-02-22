@@ -6,7 +6,7 @@ package com.example.coolweather.model;
 public class County {
     private int id;
     private String countyName;
-    private String countyCode;
+    private String countyPyName;
     private int cityId;
     public int getId() {
         return id;
@@ -20,11 +20,11 @@ public class County {
     public void setCountyName(String countyName) {
         this.countyName = countyName;
     }
-    public String getCountyCode() {
-        return countyCode;
+    public String getCountyPyName() {
+        return countyPyName;
     }
-    public void setCountyCode(String countyCode) {
-        this.countyCode = countyCode;
+    public void setCountyPyName(String countyPyName) {
+        this.countyPyName = countyPyName;
     }
     public int getCityId() {
         return cityId;
