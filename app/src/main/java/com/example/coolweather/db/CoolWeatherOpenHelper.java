@@ -30,6 +30,7 @@ public class CoolWeatherOpenHelper  extends SQLiteOpenHelper {
             + "id integer primary key autoincrement, "
             + "county_name text, "
             + "county_py_name text, "
+            + "county_code text, "
             + "city_id integer)";//County 表关联 City 表的外键
 
     public CoolWeatherOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {

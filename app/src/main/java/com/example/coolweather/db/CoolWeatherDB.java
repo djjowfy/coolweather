@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.coolweather.model.City;
 import com.example.coolweather.model.County;
@@ -110,6 +111,7 @@ public class CoolWeatherDB {
             values.put("county_name", county.getCountyName());
             values.put("county_py_name", county.getCountyPyName());
             values.put("city_id", county.getCityId());
+            values.put("county_code", county.getCountyCode());
             db.insert("County", null, values);
         }
     }
@@ -126,10 +128,29 @@ public class CoolWeatherDB {
                 county.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 county.setCountyName(cursor.getString(cursor.getColumnIndex("county_name")));
                 county.setCountyPyName(cursor.getString(cursor.getColumnIndex("county_py_name")));
+                county.setCountyCode(cursor.getString(cursor.getColumnIndex("county_code")));
                 county.setCityId(cityId);
                 list.add(county);
             } while (cursor.moveToNext());
         }
         return list;
+    }
+
+    /*
+     * 由countycode得到所属城市拼音
+     */
+    public String countyCodeToCityPyName(String countyCode)
+    {
+        Cursor cursor = db.query("County", null, "county_code = ?",
+                new String[] {countyCode}, null, null, null);
+        if (cursor.moveToFirst()) {
+            int cityId = cursor.getInt(cursor.getColumnIndex("city_id"));
+            cursor = db.query("City", null, "id=" + cityId,
+                    null, null, null, null);
+            if (cursor.moveToFirst()) {
+                return cursor.getString(cursor.getColumnIndex("city_py_name"));
+            }
+        }
+        return null;
     }
 }
