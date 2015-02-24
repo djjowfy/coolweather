@@ -22,6 +22,13 @@
             android:name=".activity.WeatherActivity"
             android:label="@string/title_activity_weather" >
         </activity>
+
+        <service
+            android:name=".receiver.AutoUpdateService">
+        </service>
+        <rervice
+            android:name=".receiver.AutoUpdateReceiver">
+        </rervice>
     </application>
 
 </manifest>
